@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "ClinicChoose";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var availableDatesJson = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.Clinics.Where(c => c.IfAvailable).Select(c => c.AvailableDate.ToString("yyyy-MM-dd")).ToList()
+    );
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+@using DrMediScanV6.Models.ViewModels
+@model BookAppointment
+
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" asp-action="ClinicChoose">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Select</th>
+                            <th>Clinic Name</th>
+                            <th>Available Date</th>
+                            <th>Average Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Clinics.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="radio" class="custom-control-input"
+                                               id="customRadio@i"
+                                               asp-for="@Model.Clinics[i].IsSelected"
+                                               name="ClinicSelection"
+                                               value="@Model.Clinics[i].ClinicId" />
+                                        <label class="custom-control-label" for="customCheck@i"></label>
+                                        <input type="hidden" asp-for="@Model.Clinics[i].ClinicId" name="Clinics[@i].ClinicId" />
+                                        <input type="hidden" asp-for="@Model.Clinics[i].ClinicName" name="Clinics[@i].ClinicName" />
+                                        <input type="hidden" asp-for="@Model.Clinics[i].AvailableDate" name="Clinics[@i].AvailableDate" />
+                                    </div>
+                                </td>
+                                <td>@Model.Clinics[i].ClinicName</td>
+                                <td>@Model.Clinics[i].AvailableDate</td>
+                                <td>@Model.Clinics[i].AverageRate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <label asp-for="PatientDetails.FirstName"></label>
+                    <input asp-for="PatientDetails.FirstName" class="form-control" />
+                    <span asp-validation-for="PatientDetails.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PatientDetails.LastName"></label>
+                    <input asp-for="PatientDetails.LastName" class="form-control" />
+                    <span asp-validation-for="PatientDetails.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PatientDetails.PhoneNo"></label>
+                    <input asp-for="PatientDetails.PhoneNo" class="form-control" />
+                    <span asp-validation-for="PatientDetails.PhoneNo" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
