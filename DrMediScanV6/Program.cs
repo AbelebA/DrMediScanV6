@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;  // For CreateScope()
 using DrMediScanV5.Services;
 using DrMediScanV6.Services;
 using Microsoft.AspNetCore.Authentication.Google;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +40,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.AddTransient<IExtendedEmailSender, EmailSender>();
+builder.Services.AddSingleton(typeof(SynchronizedConverter), new SynchronizedConverter(new PdfTools()));
 
 builder.Services.AddControllersWithViews();
 

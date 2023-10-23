@@ -15,13 +15,14 @@ namespace DrMediScanV6.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly IExtendedEmailSender _emailSender;
+        private readonly SynchronizedConverter _convert;
 
 
-        public BookAppointmentController(ApplicationDbContext context, IExtendedEmailSender emailSender)
+        public BookAppointmentController(ApplicationDbContext context, IExtendedEmailSender emailSender, SynchronizedConverter convert)
         {
             _context = context;
             _emailSender = emailSender;
-            
+            _convert = convert;
         }
 
         public IActionResult ClinicChoose()
@@ -36,8 +37,10 @@ namespace DrMediScanV6.Controllers
 
         private List<SelectedClinic> GetAvailableClinics()
         {
+            DateTime currentTime = DateTime.Now;
+
             return _context.Clinic
-                   .Where(c => c.IfAvailable)
+                   .Where(c => c.IfAvailable && c.AvailableDate > currentTime)
                    .Select(c => new SelectedClinic
                    {
                        ClinicId = c.Id,
@@ -110,7 +113,7 @@ namespace DrMediScanV6.Controllers
             }
             catch (Exception ex)
             {
-                // Handle any database errors, e.g. logging
+                // Handle any database errors
                 // You can decide how to handle this exception, whether to log it or re-throw it
                 throw new InvalidOperationException("An error occurred while saving the appointment.", ex);
             }
@@ -129,7 +132,7 @@ namespace DrMediScanV6.Controllers
         private byte[] GenerateAppointmentPdf(Appointment appointment)
         {
             // Initialize DinkToPdf converter
-            var converter = new SynchronizedConverter(new PdfTools());
+            //var converter = new SynchronizedConverter(new PdfTools());
 
             // Define the content of the PDF
             var content = $@"
@@ -161,7 +164,7 @@ namespace DrMediScanV6.Controllers
         }
             };
 
-            byte[] pdfData = converter.Convert(doc);
+            byte[] pdfData = _convert.Convert(doc);
             return pdfData;
         }
 

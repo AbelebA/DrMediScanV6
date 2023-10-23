@@ -6,9 +6,9 @@
     );
 }
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 @using DrMediScanV6.Models.ViewModels
 @model BookAppointment
@@ -16,7 +16,7 @@
 <div class="container mt-4">
     <h2 class="mb-2">Available Clinics</h2>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <form method="post" asp-action="ClinicChoose">
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
@@ -70,11 +70,32 @@
                     <input asp-for="PatientDetails.PhoneNo" class="form-control" placeholder="eg: 0412321234"/>
                     <span asp-validation-for="PatientDetails.PhoneNo" class="text-danger"></span>
                 </div>
-
                 <div class="d-flex justify-content-center mt-3">
                     <button type="submit" class="justify-content-center btn btn-primary text-center mt-3">Comfirm</button>
                 </div>
             </form>
         </div>
+        <div class="col-md-4">
+            <div id="datepicker"></div>
+        </div>
+        
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var availableDates = @Html.Raw(availableDatesJson); // Deserialize the JSON to get the list of available dates.
+
+        function available(date) {
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            if (availableDates.includes(string)) {
+                return [true, "available-date"]; // Date is available
+            }
+            return [false, ""]; // Date is not available
+        }
+
+        $("#datepicker").datepicker({
+            beforeShowDay: available, // Use the 'available' function to determine which dates are available.
+        });
+    });
+</script>
+

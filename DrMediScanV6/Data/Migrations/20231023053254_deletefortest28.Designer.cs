@@ -4,6 +4,7 @@ using DrMediScanV6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrMediScanV6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231023053254_deletefortest28")]
+    partial class deletefortest28
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,20 +69,8 @@ namespace DrMediScanV6.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            AppointmentTime = new DateTime(2023, 10, 22, 16, 45, 12, 159, DateTimeKind.Local).AddTicks(3699),
-                            ClinicId = 1,
-                            ClinicName = "Jeff's Scan World",
-                            IfCompleted = true,
-                            PatientFirstName = "abel",
-                            PatientLastName = "pan",
-                            PatientPhoneNo = "0412321234",
-                            UserName = "abelpan2022@gmail.com"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AppointmentTime = new DateTime(2023, 10, 21, 16, 45, 12, 159, DateTimeKind.Local).AddTicks(3761),
+                            Id = 99,
+                            AppointmentTime = new DateTime(2023, 10, 22, 16, 32, 54, 346, DateTimeKind.Local).AddTicks(6087),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
