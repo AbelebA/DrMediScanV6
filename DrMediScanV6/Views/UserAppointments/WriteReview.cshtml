@@ -1,0 +1,41 @@
+﻿@model DrMediScanV6.Models.ViewModels.UserReview
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Write a Review</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="SubmitReview" method="post">
+                        <input type="hidden" name="UserName" value="@Model.UserName" />
+                        <input type="hidden" name="ClinicName" value="@Model.ClinicName" />
+                        <input type="hidden" name="AppointmentId" value="@Model.AppointmentId" />
+
+                        <div class="form-group">
+                            <label for="Comment">Comment (optional, max 100 characters):</label>
+                            <textarea class="form-control" id="Comment" name="Comment" maxlength="100" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="Score">Score:</label>
+                            <input type="range" class="custom-range" id="Score" name="Score" min="1" max="10" step="1">
+                            <div class="text-center mt-2" id="scoreValue">5</div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Submit Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('Score').addEventListener('input', function (e) {
+            document.getElementById('scoreValue').innerText = e.target.value;
+        });
+    </script>
+}

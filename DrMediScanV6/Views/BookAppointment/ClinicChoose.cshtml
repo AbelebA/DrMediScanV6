@@ -14,11 +14,11 @@
 @model BookAppointment
 
 <div class="container mt-4">
-    <h2>@ViewData["Title"]</h2>
+    <h2 class="mb-2">Available Clinics</h2>
     <div class="row">
         <div class="col-md-12">
             <form method="post" asp-action="ClinicChoose">
-                <table class="table table-hover">
+                <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>Select</th>
@@ -51,26 +51,29 @@
                         }
                     </tbody>
                 </table>
-
+                <hr class="box-shadow">
+                <h2>Patient Details</h2>
                 <div class="form-group">
                     <label asp-for="PatientDetails.FirstName"></label>
-                    <input asp-for="PatientDetails.FirstName" class="form-control" />
+                    <input asp-for="PatientDetails.FirstName" class="form-control" placeholder="eg: Jack"/>
                     <span asp-validation-for="PatientDetails.FirstName" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-1">
                     <label asp-for="PatientDetails.LastName"></label>
-                    <input asp-for="PatientDetails.LastName" class="form-control" />
+                    <input asp-for="PatientDetails.LastName" class="form-control" placeholder="eg: Wilson"/>
                     <span asp-validation-for="PatientDetails.LastName" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-1">
                     <label asp-for="PatientDetails.PhoneNo"></label>
-                    <input asp-for="PatientDetails.PhoneNo" class="form-control" />
+                    <input asp-for="PatientDetails.PhoneNo" class="form-control" placeholder="eg: 0412321234"/>
                     <span asp-validation-for="PatientDetails.PhoneNo" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Confirm</button>
+                <div class="d-flex justify-content-center mt-3">
+                    <button type="submit" class="justify-content-center btn btn-primary text-center mt-3">Comfirm</button>
+                </div>
             </form>
         </div>
     </div>

@@ -1,4 +1,4 @@
-﻿namespace DrMediScanV5.Models.Data
+﻿namespace DrMediScanV6.Models.Data
 {
     public class Review
     {
@@ -8,9 +8,11 @@
 
         public int AppointmentId { get; set; }
 
-        public int ClincId { get; set; }
+        public string ClinicName { get; set; }
 
-        public int Score { get; set; }
+        public string? Comment { get; set; }
+
+        public double Score { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;
     }

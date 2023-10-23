@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DrMediScanV6.Models.Data.Appointment>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div class="container mt-4">
+    <h2 class="mb-2">History Appointments</h2>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Clinic Name</th>
+                <th>Patient Name</th>
+                <th>Appointment Time</th>
+                <th>Phone Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.ClinicName</td>
+                    <td>@($"{appointment.PatientFirstName} {appointment.PatientLastName}")</td>
+                    <td>@appointment.AppointmentTime</td>
+                    <td>@appointment.PatientPhoneNo</td>
+                    <td>
+                        <form asp-action="Index" asp-route-id="@appointment.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this appointment?');" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+
+                        @if (appointment.AppointmentTime < DateTime.Now)
+                        {
+                            <a asp-action="WriteReview" asp-route-id="@appointment.Id" class="btn btn-warning btn-sm" style="margin-left: 5px;">Review</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary">Book New Appointment</a>
+    </div>
+</div>

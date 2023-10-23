@@ -6,30 +6,6 @@
 @using DrMediScanV6.Models.Data
 @model IEnumerable<Appointment>
 
-@*<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-    function deleteAppointment(appointmentId) {
-        if (confirm('Are you sure you want to delete this appointment?')) {
-            $.ajax({
-                url: '/UserAppointments/DeleteAppointment',
-                type: 'POST',
-                data: { id: appointmentId },
-                success: function (response) {
-                    if (response.Success === "true") {
-                        // Remove the row from the table
-                        $(`button[onclick='deleteAppointment(${appointmentId})']`).closest('tr').remove();
-                        alert(response.Message);
-                    } else {
-                        alert(response.Message);
-                    }
-                },
-                error: function (error) {
-                    alert("Error while deleting appointment. Please try again.");
-                }
-            });
-        }
-    }
-</script>*@
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -47,10 +23,10 @@
 
 
 <div class="container mt-4">
-    <h2>@ViewData["Title"]</h2>
+    <h2 class="mb-2">Current Appointments</h2>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover">
+            <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -71,17 +47,23 @@
                             <td>@appointment.AppointmentTime</td>
                             <td>@appointment.PatientPhoneNo</td>
                             <td>
-                                <form asp-action="Index" asp-route-id="@appointment.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this appointment?');">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <form asp-action="Index" asp-route-id="@appointment.Id" method="post" onsubmit="return confirm('Are you sure you want to cancel this appointment?');" style="display: inline-block;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                                 </form>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center mt-3">
-                <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary">Book New Appointment</a>
+            <div class="justify-content-center text-center mt-8">
+                <div>
+                    <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary mb-3">Book New Appointment</a>
+                </div>
+                <div>
+                    <a asp-action="HistoryAppointments" asp-controller="UserAppointments" class="btn btn-secondary">View History Appointments</a>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

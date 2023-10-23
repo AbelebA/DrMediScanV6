@@ -4,6 +4,7 @@ using DrMediScanV6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrMediScanV6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231022233002_deletefortest23")]
+    partial class deletefortest23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,147 @@ namespace DrMediScanV6.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DrMediScanV5.Models.Data.Clinic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AvailableDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("AverageRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ClinicName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IfAvailable")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clinic");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableDate = new DateTime(2023, 10, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 8m,
+                            ClinicName = "Jeff's Scan World",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 9m,
+                            ClinicName = "MediScan Family Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableDate = new DateTime(2023, 10, 27, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 6m,
+                            ClinicName = "Louis Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 7m,
+                            ClinicName = "FamilyWarming Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableDate = new DateTime(2023, 10, 27, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 9m,
+                            ClinicName = "Monash Private Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableDate = new DateTime(2023, 10, 27, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 7m,
+                            ClinicName = "Carlton MRI/CT Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableDate = new DateTime(2023, 11, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 6m,
+                            ClinicName = "NeuroFocus Imaging Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableDate = new DateTime(2023, 11, 2, 14, 45, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 5m,
+                            ClinicName = "InnerView Radiology Services",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AvailableDate = new DateTime(2023, 11, 3, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 4m,
+                            ClinicName = "ProScan MRI Clinic",
+                            IfAvailable = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AvailableDate = new DateTime(2023, 10, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            AverageRate = 7m,
+                            ClinicName = "InnerDetail MRI Solutions",
+                            IfAvailable = true
+                        });
+                });
+
+            modelBuilder.Entity("DrMediScanV5.Models.Data.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClincName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Review");
+                });
 
             modelBuilder.Entity("DrMediScanV6.Models.Data.Appointment", b =>
                 {
@@ -62,147 +206,6 @@ namespace DrMediScanV6.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Appointment");
-                });
-
-            modelBuilder.Entity("DrMediScanV6.Models.Data.Clinic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AvailableDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("AverageRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ClinicName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IfAvailable")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clinic");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AvailableDate = new DateTime(2023, 10, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 8.5,
-                            ClinicName = "Jeff's Scan World",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 9.0,
-                            ClinicName = "MediScan Family Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AvailableDate = new DateTime(2023, 10, 27, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 6.2000000000000002,
-                            ClinicName = "Louis Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.4000000000000004,
-                            ClinicName = "FamilyWarming Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AvailableDate = new DateTime(2023, 10, 27, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 9.8000000000000007,
-                            ClinicName = "Monash Private Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AvailableDate = new DateTime(2023, 10, 27, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.0,
-                            ClinicName = "Carlton MRI/CT Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AvailableDate = new DateTime(2023, 11, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 6.2999999999999998,
-                            ClinicName = "NeuroFocus Imaging Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AvailableDate = new DateTime(2023, 11, 2, 14, 45, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 5.0,
-                            ClinicName = "InnerView Radiology Services",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AvailableDate = new DateTime(2023, 11, 3, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 4.7999999999999998,
-                            ClinicName = "ProScan MRI Clinic",
-                            IfAvailable = true
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AvailableDate = new DateTime(2023, 10, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.5,
-                            ClinicName = "InnerDetail MRI Solutions",
-                            IfAvailable = true
-                        });
-                });
-
-            modelBuilder.Entity("DrMediScanV6.Models.Data.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClinicName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Score")
-                        .HasColumnType("float");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
