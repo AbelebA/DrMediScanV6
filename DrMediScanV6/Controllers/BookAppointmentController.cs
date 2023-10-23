@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DrMediScanV6.Controllers
 {
+    [Authorize(Roles = "Patient")]
     public class BookAppointmentController : Controller
     {
-
         private readonly ApplicationDbContext _context;
         private readonly IExtendedEmailSender _emailSender;
         private readonly SynchronizedConverter _convert;
-
 
         public BookAppointmentController(ApplicationDbContext context, IExtendedEmailSender emailSender, SynchronizedConverter convert)
         {
@@ -25,8 +30,10 @@ namespace DrMediScanV6.Controllers
             _convert = convert;
         }
 
+        // Displays available clinics for the patient to choose from
         public IActionResult ClinicChoose()
         {
+            // Initialize a view model with available clinics and patient details
             var viewModel = new BookAppointment
             {
                 Clinics = GetAvailableClinics(),
@@ -35,34 +42,23 @@ namespace DrMediScanV6.Controllers
             return View(viewModel);
         }
 
-        private List<SelectedClinic> GetAvailableClinics()
-        {
-            DateTime currentTime = DateTime.Now;
-
-            return _context.Clinic
-                   .Where(c => c.IfAvailable && c.AvailableDate > currentTime)
-                   .Select(c => new SelectedClinic
-                   {
-                       ClinicId = c.Id,
-                       ClinicName = c.ClinicName,
-                       AvailableDate = c.AvailableDate,
-                       AverageRate = c.AverageRate
-                   }).ToList();
-        }
-
+        // Handles the selection of a clinic by the patient
         [HttpPost]
         public async Task<IActionResult> ClinicChoose(BookAppointment viewModel, int ClinicSelection)
         {
             if (ModelState.IsValid)
             {
+                // Find the selected clinic
                 var selectedClinic = viewModel.Clinics.FirstOrDefault(c => c.ClinicId == ClinicSelection);
                 if (selectedClinic == null)
                 {
+                    // If clinic not found, display an error and return to the clinic selection page
                     ModelState.AddModelError(string.Empty, "Please select a clinic.");
                     viewModel.Clinics = GetAvailableClinics();
                     return View(viewModel);
                 }
 
+                // Save appointment data and send confirmation email
                 bool isSuccess = await SaveAppointmentData(selectedClinic, viewModel.PatientDetails);
                 if (!isSuccess)
                 {
@@ -78,15 +74,31 @@ namespace DrMediScanV6.Controllers
             }
         }
 
+        // Retrieves available clinics based on certain criteria
+        private List<SelectedClinic> GetAvailableClinics()
+        {
+            DateTime currentTime = DateTime.Now;
 
+            return _context.Clinic
+                   .Where(c => c.IfAvailable && c.AvailableDate > currentTime)
+                   .Select(c => new SelectedClinic
+                   {
+                       ClinicId = c.Id,
+                       ClinicName = c.ClinicName,
+                       AvailableDate = c.AvailableDate,
+                       AverageRate = c.AverageRate
+                   }).ToList();
+        }
+
+        // Saves appointment data to the database and sends confirmation email
         private async Task<bool> SaveAppointmentData(SelectedClinic selectedClinic, Patient patient)
         {
             if (selectedClinic == null || patient == null)
             {
                 throw new ArgumentNullException("Both clinic and patient must be provided.");
-                //return false;
             }
 
+            // Mark the selected clinic as unavailable
             var clinicToMarkUnavailable = _context.Clinic.FirstOrDefault(c => c.Id == selectedClinic.ClinicId);
             if (clinicToMarkUnavailable != null)
             {
@@ -118,6 +130,7 @@ namespace DrMediScanV6.Controllers
                 throw new InvalidOperationException("An error occurred while saving the appointment.", ex);
             }
 
+            // Generate a PDF for the appointment details and send it via email
             var appointmentDetails = _context.Appointment.FirstOrDefault(a => a.ClinicId == selectedClinic.ClinicId && a.UserName == User.Identity.Name);
             byte[] pdfData = GenerateAppointmentPdf(appointmentDetails);
 
@@ -129,11 +142,9 @@ namespace DrMediScanV6.Controllers
             return true;
         }
 
+        // Generates a PDF document for appointment details
         private byte[] GenerateAppointmentPdf(Appointment appointment)
         {
-            // Initialize DinkToPdf converter
-            //var converter = new SynchronizedConverter(new PdfTools());
-
             // Define the content of the PDF
             var content = $@"
                 <html>
@@ -151,27 +162,27 @@ namespace DrMediScanV6.Controllers
             var doc = new HtmlToPdfDocument()
             {
                 GlobalSettings = {
-            ColorMode = ColorMode.Color,
-            Orientation = Orientation.Portrait,
-            PaperSize = PaperKind.A4
-        },
+                    ColorMode = ColorMode.Color,
+                    Orientation = Orientation.Portrait,
+                    PaperSize = PaperKind.A4
+                },
                 Objects = {
-            new ObjectSettings() {
-                PagesCount = true,
-                HtmlContent = content,
-                WebSettings = { DefaultEncoding = "utf-8" }
-            }
-        }
+                    new ObjectSettings() {
+                        PagesCount = true,
+                        HtmlContent = content,
+                        WebSettings = { DefaultEncoding = "utf-8" }
+                    }
+                }
             };
 
             byte[] pdfData = _convert.Convert(doc);
             return pdfData;
         }
 
+        // Displays a success message after booking an appointment
         public IActionResult SuccessBook()
         {
             return View();
         }
-
     }
 }

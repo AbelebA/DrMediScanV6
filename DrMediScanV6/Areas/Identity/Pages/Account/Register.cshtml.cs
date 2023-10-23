@@ -141,13 +141,13 @@ namespace DrMediScanV6.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (Input.IsPatient)
-                    {
-                        await _userManager.AddToRoleAsync(user, "Patient");
-                    }
                     if (Input.IsAdministrator)
                     {
                         await _userManager.AddToRoleAsync(user, "Administrator");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Patient");
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);

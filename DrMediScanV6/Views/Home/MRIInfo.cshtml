@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "About MRI";
+}
+
+<div class="banner">
+    <h1 class="mb-4 larger_header">What is MRI ?</h1>
+    <div>
+        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary mb-3">Book Appointment Now</a>
+    </div>
+</div>
+
+<div class="mri-info" style="display: flex; flex-direction: column; align-items: center; margin-top:1rem;">
+    <div style="display: flex; align-items: center; margin-bottom:2rem;">
+        <img src="~/Images/MRIInfo_1.jpg" alt="MRI Image" style="margin-right:1rem; width:50%; border-radius:12px;">
+        <div>
+            <h2 style="color:brown; font-weight:bold">Know About MRI</h2>
+            <p style="font-size:1.25rem; text-align:justify;">
+                Magnetic Resonance Imaging (MRI) is a diagnostic procedure that uses a combination of a large magnet, radio frequencies, and a computer to produce detailed images of organs and structures within the body.
+            </p>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+        <div>
+            <h2 style="color:brown; font-weight:bold">Advantages of MRI</h2>
+            <p style="font-size:1.25rem; text-align:justify;">
+                MRI has several advantages over other imaging methods. It doesn't use radiation like X-rays or CT scans. It can also provide clearer, more detailed images than other imaging methods, making it an invaluable tool in early diagnosis and evaluation of many conditions.
+            </p>
+        </div>
+        <img src="~/Images/MRIInfo_2.jpg" alt="MRI Advantages Image" style="margin-left:1rem;width:50%; border-radius:12px;">
+    </div>
+
+</div>
+

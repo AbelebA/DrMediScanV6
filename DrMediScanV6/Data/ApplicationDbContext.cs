@@ -19,16 +19,16 @@ namespace DrMediScanV6.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Clinic>().HasData(
-                new Clinic { Id = 1, ClinicName = "Jeff's Scan World", AvailableDate = DateTime.Parse("2023-10-25 12:30:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 2, ClinicName = "MediScan Family Clinic", AvailableDate = DateTime.Parse("2023-10-31 10:15:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 3, ClinicName = "Louis Clinic", AvailableDate = DateTime.Parse("2023-10-27 9:30:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 4, ClinicName = "FamilyWarming Clinic", AvailableDate = DateTime.Parse("2023-10-31 10:15:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 5, ClinicName = "Monash Private Clinic", AvailableDate = DateTime.Parse("2023-10-27 14:00:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 6, ClinicName = "Carlton MRI/CT Clinic", AvailableDate = DateTime.Parse("2023-10-27 15:00:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 7, ClinicName = "NeuroFocus Imaging Clinic", AvailableDate = DateTime.Parse("2023-11-02 9:30:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 8, ClinicName = "InnerView Radiology Services", AvailableDate = DateTime.Parse("2023-11-02 14:45:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 9, ClinicName = "ProScan MRI Clinic", AvailableDate = DateTime.Parse("2023-11-03 10:00:00"), AverageRate = 0, IfAvailable = true },
-                new Clinic { Id = 10, ClinicName = "InnerDetail MRI Solutions", AvailableDate = DateTime.Parse("2023-11-03 9:00:00"), AverageRate = 0, IfAvailable = true }
+                new Clinic { Id = 1, ClinicName = "Jeff's Scan World", AvailableDate = DateTime.Parse("2023-10-25 12:30:00"), AverageRate = 8.0, IfAvailable = true },
+                new Clinic { Id = 2, ClinicName = "MediScan Family Clinic", AvailableDate = DateTime.Parse("2023-10-31 10:15:00"), AverageRate = 7.6, IfAvailable = true },
+                new Clinic { Id = 3, ClinicName = "Louis Clinic", AvailableDate = DateTime.Parse("2023-10-27 9:30:00"), AverageRate = 7.7, IfAvailable = true },
+                new Clinic { Id = 4, ClinicName = "FamilyWarming Clinic", AvailableDate = DateTime.Parse("2023-10-31 10:15:00"), AverageRate = 9.2, IfAvailable = true },
+                new Clinic { Id = 5, ClinicName = "Monash Private Clinic", AvailableDate = DateTime.Parse("2023-10-27 14:00:00"), AverageRate = 6.3, IfAvailable = true },
+                new Clinic { Id = 6, ClinicName = "Carlton MRI/CT Clinic", AvailableDate = DateTime.Parse("2023-10-27 15:00:00"), AverageRate = 7.3, IfAvailable = true },
+                new Clinic { Id = 7, ClinicName = "NeuroFocus Imaging Clinic", AvailableDate = DateTime.Parse("2023-11-02 9:30:00"), AverageRate = 5.8, IfAvailable = true },
+                new Clinic { Id = 8, ClinicName = "InnerView Radiology Services", AvailableDate = DateTime.Parse("2023-11-02 14:45:00"), AverageRate = 8.5, IfAvailable = true },
+                new Clinic { Id = 9, ClinicName = "ProScan MRI Clinic", AvailableDate = DateTime.Parse("2023-11-03 10:00:00"), AverageRate = 6.6, IfAvailable = true },
+                new Clinic { Id = 10, ClinicName = "InnerDetail MRI Solutions", AvailableDate = DateTime.Parse("2023-11-03 9:00:00"), AverageRate = 7.0, IfAvailable = true }
             );
 
             modelBuilder.Entity<Appointment>().HasData(

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DrMediScanV6.Models.ViewModels.ClinicInfo>
+
+@{
+    ViewData["Title"] = "Clinic Info";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+<div class="banner">
+    <h1 class="mb-4 larger_header text-center">Get know about available clinics</h1>
+    <div>
+        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary">Book Appointment Now</a>
+    </div>
+</div>
+
+<div class="table-responsive mt-4">
+    <h2>Information of Top Clinics</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Clinic Name</th>
+                <th>Average Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clinic in Model)
+            {
+                <tr>
+                    <td>@clinic.ClinicName</td>
+                    <td>@clinic.AverageRate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="d-flex flex-column justify-content-center mt-4">
+    <h2>Rate of Top Clinics</h2>
+    <canvas id="clinicChart" width="400" height="200"></canvas>
+</div>
+<div class="text-center mt-4">
+    <button onclick="downloadCSV()" class="btn btn-primary">Download Information as .csv File</button>
+    <button onclick="downloadXLSX()" class="btn btn-primary">Download Information as .xlsx File</button>
+</div>
+
+
+<script>
+    var ctx = document.getElementById('clinicChart').getContext('2d');
+
+    var clinicNames = @Html.Raw(Json.Serialize(Model.OrderByDescending(c => c.AverageRate).Select(c => c.ClinicName)));
+    var averageRates = @Html.Raw(Json.Serialize(Model.OrderByDescending(c => c.AverageRate).Select(c => c.AverageRate)));
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: clinicNames,
+            datasets: [{
+                label: 'Average Rate',
+                data: averageRates,
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    });
+    function downloadCSV() {
+        const table = document.querySelector(".table");
+        const rows = Array.from(table.querySelectorAll("tr"));
+        const csvArray = rows.map(row => Array.from(row.querySelectorAll("td, th")).map(cell => '"' + cell.innerText + '"').join(','));
+        const csv = csvArray.join('\r\n');
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'ClinicData.csv';
+        a.click();
+    }
+
+    function downloadXLSX() {
+        const table = document.querySelector(".table");
+        const ws = XLSX.utils.table_to_sheet(table);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "ClinicData");
+        XLSX.writeFile(wb, "ClinicData.xlsx");
+    }
+
+</script>
+
+
+

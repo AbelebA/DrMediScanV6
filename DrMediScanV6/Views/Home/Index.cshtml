@@ -5,15 +5,27 @@
 <div class="banner">
     <h1 class="mb-4 larger_header">Welcome to DrMediScan</h1>
     <div>
-        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary mb-3">Book Appointment Now</a>
+        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary">Book Appointment Now</a>
     </div>
 </div>
     
 <div class="section">
+    <div class="subSection3">
+        <h2 class="medium_header text-center">Learn about MRI</h2>
+        <div>
+            <a asp-action="MRIInfo" asp-controller="Home" class="btn btn-primary">Start Reading</a>
+        </div>
+    </div>
     <div class="subSection1">
-        <h2>Find best Clinics</h2>
+        <h2 class="medium_header text-center">Find best clinics</h2>
+        <div>
+            <a asp-action="ClinicInfo" asp-controller="Home" class="btn btn-primary">Click Find</a>
+        </div>
     </div>
     <div class="subSection2">
-        <h2>Say Hi to our experts</h2>
+        <h2 class="medium_header text-center">Greet to experts</h2>
+        <div>
+            <a asp-action="ProfessorInfo" asp-controller="Home" class="btn btn-primary">Say Hi!</a>
+        </div>
     </div>
 </div>

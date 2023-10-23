@@ -4,6 +4,7 @@ using DrMediScanV6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrMediScanV6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231023113641_deletefortest32")]
+    partial class deletefortest32
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AppointmentTime = new DateTime(2023, 10, 23, 0, 57, 58, 818, DateTimeKind.Local).AddTicks(2088),
+                            AppointmentTime = new DateTime(2023, 10, 22, 22, 36, 41, 250, DateTimeKind.Local).AddTicks(9235),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -79,7 +82,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AppointmentTime = new DateTime(2023, 10, 22, 0, 57, 58, 818, DateTimeKind.Local).AddTicks(2129),
+                            AppointmentTime = new DateTime(2023, 10, 21, 22, 36, 41, 250, DateTimeKind.Local).AddTicks(9280),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -97,6 +100,9 @@ namespace DrMediScanV6.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("AvailableDate")
                         .HasColumnType("datetime2");
@@ -120,7 +126,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 1,
                             AvailableDate = new DateTime(2023, 10, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 8.0,
+                            AverageRate = 0.0,
                             ClinicName = "Jeff's Scan World",
                             IfAvailable = true
                         },
@@ -128,7 +134,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 2,
                             AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.5999999999999996,
+                            AverageRate = 0.0,
                             ClinicName = "MediScan Family Clinic",
                             IfAvailable = true
                         },
@@ -136,7 +142,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 3,
                             AvailableDate = new DateTime(2023, 10, 27, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.7000000000000002,
+                            AverageRate = 0.0,
                             ClinicName = "Louis Clinic",
                             IfAvailable = true
                         },
@@ -144,7 +150,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 4,
                             AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 9.1999999999999993,
+                            AverageRate = 0.0,
                             ClinicName = "FamilyWarming Clinic",
                             IfAvailable = true
                         },
@@ -152,7 +158,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 5,
                             AvailableDate = new DateTime(2023, 10, 27, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 6.2999999999999998,
+                            AverageRate = 0.0,
                             ClinicName = "Monash Private Clinic",
                             IfAvailable = true
                         },
@@ -160,7 +166,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 6,
                             AvailableDate = new DateTime(2023, 10, 27, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.2999999999999998,
+                            AverageRate = 0.0,
                             ClinicName = "Carlton MRI/CT Clinic",
                             IfAvailable = true
                         },
@@ -168,7 +174,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 7,
                             AvailableDate = new DateTime(2023, 11, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 5.7999999999999998,
+                            AverageRate = 0.0,
                             ClinicName = "NeuroFocus Imaging Clinic",
                             IfAvailable = true
                         },
@@ -176,7 +182,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 8,
                             AvailableDate = new DateTime(2023, 11, 2, 14, 45, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 8.5,
+                            AverageRate = 0.0,
                             ClinicName = "InnerView Radiology Services",
                             IfAvailable = true
                         },
@@ -184,7 +190,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 9,
                             AvailableDate = new DateTime(2023, 11, 3, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 6.5999999999999996,
+                            AverageRate = 0.0,
                             ClinicName = "ProScan MRI Clinic",
                             IfAvailable = true
                         },
@@ -192,7 +198,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 10,
                             AvailableDate = new DateTime(2023, 11, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.0,
+                            AverageRate = 0.0,
                             ClinicName = "InnerDetail MRI Solutions",
                             IfAvailable = true
                         });

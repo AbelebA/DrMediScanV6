@@ -1,0 +1,50 @@
+﻿@model DrMediScanV6.Models.Data.Clinic
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit clinic</h1>
+
+<h4>Clinic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ClinicName" class="control-label"></label>
+                <input asp-for="ClinicName" class="form-control" />
+                <span asp-validation-for="ClinicName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvailableDate" class="control-label"></label>
+                <input asp-for="AvailableDate" class="form-control" />
+                <span asp-validation-for="AvailableDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AverageRate" class="control-label"></label>
+                <input asp-for="AverageRate" class="form-control" />
+                <span asp-validation-for="AverageRate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IfAvailable" /> @Html.DisplayNameFor(model => model.IfAvailable)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -4,6 +4,7 @@ using DrMediScanV6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrMediScanV6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231023121945_deletefortest33")]
+    partial class deletefortest33
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AppointmentTime = new DateTime(2023, 10, 23, 0, 57, 58, 818, DateTimeKind.Local).AddTicks(2088),
+                            AppointmentTime = new DateTime(2023, 10, 22, 23, 19, 45, 776, DateTimeKind.Local).AddTicks(8020),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -79,7 +82,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AppointmentTime = new DateTime(2023, 10, 22, 0, 57, 58, 818, DateTimeKind.Local).AddTicks(2129),
+                            AppointmentTime = new DateTime(2023, 10, 21, 23, 19, 45, 776, DateTimeKind.Local).AddTicks(8060),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -136,7 +139,7 @@ namespace DrMediScanV6.Data.Migrations
                         {
                             Id = 3,
                             AvailableDate = new DateTime(2023, 10, 27, 9, 30, 0, 0, DateTimeKind.Unspecified),
-                            AverageRate = 7.7000000000000002,
+                            AverageRate = 0.0,
                             ClinicName = "Louis Clinic",
                             IfAvailable = true
                         },

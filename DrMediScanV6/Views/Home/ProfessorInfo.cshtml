@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "About Professor";
+}
+
+<div class="banner">
+    <h1 class="mb-4 larger_header">Top experts we have</h1>
+    <div>
+        <a asp-action="ClinicChoose" asp-controller="BookAppointment" class="btn btn-primary mb-3">Book Appointment Now</a>
+    </div>
+</div>
+
+<div class="'professor-info" style="display: flex; flex-direction: column; align-items: center; margin-top:1rem;">
+    <div style="display: flex; align-items: center; margin-bottom:2rem;">
+        <img src="~/Images/professorInfo_1.jpg" alt="MRI Image" style="margin-right:1rem; width:50%; height:calc(100vh / 1.25); border-radius:12px;">
+        <div>
+            <h1 style="color:brown; font-style:italic; font-weight:bold;">Dr. Lorenzo Bianchi</h1>
+            <p style="font-size:1.5rem; text-align:justify; font-weight:bold;">
+                MD, Ph.D. in Radiology
+            </p>
+            <p>
+                Dr. Lorenzo Bianchi is a renowned MRI expert from Milan, Italy. After completing his medical degree from the University of Milan, he pursued specialized training in radiology. 
+                His passion for MRI technology led him to obtain a Ph.D. in Radiology, with a specific focus on advanced MRI techniques.<br>
+                Throughout his career, Dr. Bianchi has dedicated over 20 years exclusively to the field of MRI. 
+                He has served as the Head of MRI at the prestigious Polyclinic of Milan and has been instrumental in introducing and standardizing 3T MRI technology in various medical institutions across Italy. 
+                In addition to his clinical work, Dr. Bianchi is a sought-after speaker at international radiology conferences and has authored multiple research papers on the advancements of MRI technology and its applications.
+            </p>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+        <div>
+            <h1 style="color:brown; font-style:italic; font-weight:bold;">Dr. Amelia Turner</h1>
+            <p style="font-size:1.5rem; text-align:justify; font-weight:bold;">
+                MBBS, Fellowship in Radiology with a specialization in MRI
+            </p>
+            <p>
+                Dr. Amelia Turner hails from Sydney, Australia, and is recognized as one of the leading MRI specialists in the Pacific region. She completed her medical studies at the University of Sydney, 
+                followed by a rigorous radiology residency. Drawn to the world of MRI, Dr. Turner then undertook a specialized fellowship in MRI, honing her skills with the best in the field.<br>
+                With over 15 years of experience dedicated solely to MRI, Dr. Turner has been at the forefront of using MRI for sports-related injuries, 
+                having worked closely with Australia's elite athletes and sports teams. 
+                She currently serves as the Director of MRI Services at the Royal Sydney Hospital and is actively involved in research, 
+                particularly focused on the use of MRI in early diagnosis of degenerative joint diseases. 
+                Dr. Turner frequently represents Australia at global medical conferences, sharing her insights and knowledge about MRI innovations and practices.
+            </p>
+        </div>
+        <img src="~/Images/ProfessorInfo_2.jpg" alt="MRI Advantages Image" style="margin-left:1rem;width:50%; height:calc(100vh / 1.25); border-radius:12px;">
+    </div>
+
+</div>
+

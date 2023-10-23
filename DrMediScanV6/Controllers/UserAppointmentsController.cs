@@ -2,9 +2,15 @@
 using DrMediScanV6.Models.Data;
 using Microsoft.AspNetCore.Mvc;
 using DrMediScanV6.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DrMediScanV6.Controllers
 {
+    [Authorize(Roles = "Patient")]
     public class UserAppointmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -14,6 +20,7 @@ namespace DrMediScanV6.Controllers
             _context = context;
         }
 
+        // Displays upcoming appointments for the logged-in patient
         public IActionResult Index()
         {
             var userName = User.Identity.Name;
@@ -39,7 +46,7 @@ namespace DrMediScanV6.Controllers
             return View(appointments);
         }
 
-        // Logic of Deleting Appointment
+        // Handles the logic for deleting an appointment
         [HttpPost]
         public async Task<IActionResult> Index(int id)
         {
@@ -66,25 +73,25 @@ namespace DrMediScanV6.Controllers
             }
             catch (Exception ex)
             {
-
                 TempData["ErrorMessage"] = "An error occurred while deleting the appointment.";
             }
 
             return RedirectToAction("Index");
         }
 
+        // Displays completed appointments for the logged-in patient
         public IActionResult HistoryAppointments()
         {
             var userName = User.Identity.Name;
 
-            // find appointments whose IfCompleted is true
+            // Find appointments whose IfCompleted is true
             var completedAppointments = _context.Appointment
                                                 .Where(a => a.UserName == userName && a.IfCompleted)
                                                 .ToList();
             return View(completedAppointments);
         }
 
-
+        // Displays a form for writing a review for a specific appointment
         public IActionResult WriteReview(int id)
         {
             var appointment = _context.Appointment.Find(id);
@@ -101,6 +108,7 @@ namespace DrMediScanV6.Controllers
             return View(viewModel);
         }
 
+        // Handles the submission of a review for a specific appointment
         [HttpPost]
         public async Task<IActionResult> SubmitReview(UserReview viewModel)
         {
@@ -143,6 +151,5 @@ namespace DrMediScanV6.Controllers
             }
             return View("WriteReview", viewModel);
         }
-
     }
 }
