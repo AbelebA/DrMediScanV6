@@ -56,7 +56,9 @@ namespace DrMediScanV6.Controllers
                        .Select(c => new ClinicInfo
                        {
                            ClinicName = c.ClinicName,
-                           AverageRate = c.AverageRate
+                           AverageRate = c.AverageRate,
+                           Latitude = c.Latitude,
+                           Longitude = c.Longitude
                        }).ToList();
 
             return View(clinics);

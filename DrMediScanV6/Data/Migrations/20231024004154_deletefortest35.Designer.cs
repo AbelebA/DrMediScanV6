@@ -4,6 +4,7 @@ using DrMediScanV6.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrMediScanV6.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231024004154_deletefortest35")]
+    partial class deletefortest35
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,7 +70,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AppointmentTime = new DateTime(2023, 10, 30, 15, 29, 52, 682, DateTimeKind.Local).AddTicks(2141),
+                            AppointmentTime = new DateTime(2023, 10, 23, 11, 41, 53, 971, DateTimeKind.Local).AddTicks(8550),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -79,7 +82,7 @@ namespace DrMediScanV6.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AppointmentTime = new DateTime(2023, 10, 29, 15, 29, 52, 682, DateTimeKind.Local).AddTicks(2185),
+                            AppointmentTime = new DateTime(2023, 10, 22, 11, 41, 53, 971, DateTimeKind.Local).AddTicks(8594),
                             ClinicId = 1,
                             ClinicName = "Jeff's Scan World",
                             IfCompleted = true,
@@ -111,12 +114,6 @@ namespace DrMediScanV6.Data.Migrations
                     b.Property<bool>("IfAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Longitude")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.ToTable("Clinic");
@@ -128,9 +125,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 25, 12, 30, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 0.0,
                             ClinicName = "Jeff's Scan World",
-                            IfAvailable = true,
-                            Latitude = -37.813600000000001,
-                            Longitude = 145.11462
+                            IfAvailable = true
                         },
                         new
                         {
@@ -138,9 +133,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 7.5999999999999996,
                             ClinicName = "MediScan Family Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.908999999999999,
-                            Longitude = 145.11330000000001
+                            IfAvailable = true
                         },
                         new
                         {
@@ -148,9 +141,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 27, 9, 30, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 7.7000000000000002,
                             ClinicName = "Louis Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.903850433781621,
-                            Longitude = 145.1069008377784
+                            IfAvailable = true
                         },
                         new
                         {
@@ -158,9 +149,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 31, 10, 15, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 9.1999999999999993,
                             ClinicName = "FamilyWarming Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.851512248323765,
-                            Longitude = 145.00678905311517
+                            IfAvailable = true
                         },
                         new
                         {
@@ -168,9 +157,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 27, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 6.2999999999999998,
                             ClinicName = "Monash Private Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.920757140325136,
-                            Longitude = 145.12112606415644
+                            IfAvailable = true
                         },
                         new
                         {
@@ -178,9 +165,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 10, 27, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 7.2999999999999998,
                             ClinicName = "Carlton MRI/CT Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.957125510635002,
-                            Longitude = 145.07206709932336
+                            IfAvailable = true
                         },
                         new
                         {
@@ -188,9 +173,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 11, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 5.7999999999999998,
                             ClinicName = "NeuroFocus Imaging Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.833702881337224,
-                            Longitude = 144.95433065062537
+                            IfAvailable = true
                         },
                         new
                         {
@@ -198,9 +181,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 11, 2, 14, 45, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 8.5,
                             ClinicName = "InnerView Radiology Services",
-                            IfAvailable = true,
-                            Latitude = -37.823538839677184,
-                            Longitude = 145.03830568676884
+                            IfAvailable = true
                         },
                         new
                         {
@@ -208,9 +189,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 11, 3, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 6.5999999999999996,
                             ClinicName = "ProScan MRI Clinic",
-                            IfAvailable = true,
-                            Latitude = -37.876655644717658,
-                            Longitude = 145.12110690339233
+                            IfAvailable = true
                         },
                         new
                         {
@@ -218,9 +197,7 @@ namespace DrMediScanV6.Data.Migrations
                             AvailableDate = new DateTime(2023, 11, 3, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             AverageRate = 7.0,
                             ClinicName = "InnerDetail MRI Solutions",
-                            IfAvailable = true,
-                            Latitude = -37.952469226632616,
-                            Longitude = 145.15023333415897
+                            IfAvailable = true
                         });
                 });
 

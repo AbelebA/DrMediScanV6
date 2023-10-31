@@ -4,6 +4,8 @@
     ViewData["Title"] = "Clinic Info";
 }
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 
@@ -14,25 +16,32 @@
     </div>
 </div>
 
-<div class="table-responsive mt-4">
-    <h2>Information of Top Clinics</h2>
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Clinic Name</th>
-                <th>Average Rate</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var clinic in Model)
-            {
-                <tr>
-                    <td>@clinic.ClinicName</td>
-                    <td>@clinic.AverageRate</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-md-6">
+        <div class="table-responsive mt-4">
+            <h2>Information of Top Clinics</h2>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Clinic Name</th>
+                        <th>Average Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var clinic in Model)
+                    {
+                        <tr>
+                            <td>@clinic.ClinicName</td>
+                            <td>@clinic.AverageRate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="map" style="height: 500px;" class="mt-4"></div>
+    </div>
 </div>
 <div class="d-flex flex-column justify-content-center mt-4">
     <h2>Rate of Top Clinics</h2>
@@ -90,6 +99,23 @@
         XLSX.utils.book_append_sheet(wb, ws, "ClinicData");
         XLSX.writeFile(wb, "ClinicData.xlsx");
     }
+
+    var map = L.map('map').setView([-37.8136, 144.9631], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var clinics = @Html.Raw(Json.Serialize(Model));
+    var markerIconUrl = '@Url.Content("~/Images/location.png")';
+    //console.log(clinics);
+    //console.log(markerIconUrl);
+    clinics.forEach(function (clinic) {
+        //console.log(clinic)
+        if (clinic.latitude && clinic.longitude) {
+            L.marker([clinic.latitude, clinic.longitude]).bindPopup('<strong>' + clinic.clinicName + '</strong><br>Rate: ' + clinic.averageRate).addTo(map);
+        }
+    });
 
 </script>
 

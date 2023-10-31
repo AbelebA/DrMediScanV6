@@ -6,8 +6,6 @@
     );
 }
 
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
 @using DrMediScanV6.Models.ViewModels
@@ -52,31 +50,34 @@
                     </tbody>
                 </table>
                 <hr class="box-shadow">
-                <h2>Patient Details</h2>
-                <div class="form-group">
-                    <label asp-for="PatientDetails.FirstName"></label>
-                    <input asp-for="PatientDetails.FirstName" class="form-control" placeholder="eg: Jack"/>
-                    <span asp-validation-for="PatientDetails.FirstName" class="text-danger"></span>
-                </div>
+                <div class="row">
+                    <h2>Patient Details</h2>
+                    <div class="form-group">
+                        <label asp-for="PatientDetails.FirstName"></label>
+                        <input asp-for="PatientDetails.FirstName" class="form-control" placeholder="eg: Jack"/>
+                        <span asp-validation-for="PatientDetails.FirstName" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group mt-1">
-                    <label asp-for="PatientDetails.LastName"></label>
-                    <input asp-for="PatientDetails.LastName" class="form-control" placeholder="eg: Wilson"/>
-                    <span asp-validation-for="PatientDetails.LastName" class="text-danger"></span>
-                </div>
+                    <div class="form-group mt-1">
+                        <label asp-for="PatientDetails.LastName"></label>
+                        <input asp-for="PatientDetails.LastName" class="form-control" placeholder="eg: Wilson"/>
+                        <span asp-validation-for="PatientDetails.LastName" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group mt-1">
-                    <label asp-for="PatientDetails.PhoneNo"></label>
-                    <input asp-for="PatientDetails.PhoneNo" class="form-control" placeholder="eg: 0412321234"/>
-                    <span asp-validation-for="PatientDetails.PhoneNo" class="text-danger"></span>
-                </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <button type="submit" class="justify-content-center btn btn-primary text-center mt-3">Comfirm</button>
+                    <div class="form-group mt-1">
+                        <label asp-for="PatientDetails.PhoneNo"></label>
+                        <input asp-for="PatientDetails.PhoneNo" class="form-control" placeholder="eg: 0412321234"/>
+                        <span asp-validation-for="PatientDetails.PhoneNo" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="submit" class="justify-content-center btn btn-primary text-center mt-3">Comfirm</button>
+                    </div>
                 </div>
             </form>
         </div>
         <div class="col-md-4">
             <div id="datepicker"></div>
+            <div id="map" style="height: 400px;"></div>
         </div>
         
     </div>
@@ -96,6 +97,8 @@
         $("#datepicker").datepicker({
             beforeShowDay: available, // Use the 'available' function to determine which dates are available.
         });
+        var clinicsWithAvailability = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Clinics.Where(c => c.IfAvailable)));
     });
 </script>
+
 
